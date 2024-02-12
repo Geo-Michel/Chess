@@ -1,10 +1,8 @@
 public class Pawn extends Piece{
-    private Piece [][]board=new Piece[8][8];
     private boolean moved;
 
-    public Pawn(String name, String position, boolean isWhite, Piece [][] board) {
+    public Pawn(String name, String position, boolean isWhite) {
         super(name, position, isWhite);
-        this.board=board;
         this.moved=false;
     }
     /**THIS METHOD CHECKS IF THE PAWN CAN MOVE TO THE PROVIDED POSITION
@@ -14,7 +12,7 @@ public class Pawn extends Piece{
      * @var xTG the vertical axis the pawn is requested to be moved to
      * @var yTG the horizontal axis the pawn is requested to be moved to
      */
-    boolean move (String moveto){
+    public boolean move (String moveto, Piece [][] board){
         int xN,yN,xTG,yTG;
         xN=this.getXAxis();
         yN=this.getYAxis();
@@ -29,12 +27,15 @@ public class Pawn extends Piece{
         else {
             if(xTG==xN){
                 if(((!moved)&&yTG==yN+2)||(yTG==yN+1)){
+                    this.setPosition(((char)xTG)+String.valueOf(yN));
                     return true;
                 }
             }
             else if ((xTG==xN+1)&&(yTG==yN+1)&&(board[xTG-97][yTG-1].isWhite()!=this.isWhite())) {
+                this.setPosition(((char)xTG)+String.valueOf(yN));
                 return true;
             } else if ((xTG==xN-1)&&(yTG==yN+1)&&(board[xTG-97][yTG-1].isWhite()!=this.isWhite())) {
+                this.setPosition(((char)xTG)+String.valueOf(yN));
                 return true;
             }
         }
