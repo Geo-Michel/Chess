@@ -16,6 +16,13 @@ public class Piece {
     public String getPosition() {
         return position;
     }
+    public int getXAxis(){
+        return position.charAt(0);
+    }
+
+    public int getYAxis(){
+        return position.charAt(1)-48;
+    }
 
     public boolean isWhite() {
         return isWhite;
