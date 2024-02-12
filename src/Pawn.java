@@ -6,7 +6,7 @@ public class Pawn extends Piece{
         this.moved=false;
     }
     /**THIS METHOD CHECKS IF THE PAWN CAN MOVE TO THE PROVIDED POSITION
-    * @param moveto the position to where the pawn is requested to be moved to
+    * @param moveto the position where the pawn is requested to be moved to
      * @var xN the horizontal axis the pawn currently is
      * @var yN the vertical axis the pawn currently is
      * @var xTG the vertical axis the pawn is requested to be moved to
