@@ -1,8 +1,10 @@
 public class Bishop extends Piece {
+    private boolean pinned;
     public Bishop(String name, String position, boolean isWhite) {
         super(name, position, isWhite);
+        this.pinned=false;
     }
-
+    //TODO CHECK IF THE PIECE IS PINNED
     /**
      * THIS METHOD CHECKS IF THE BISHOP CAN MOVE TO THE PROVIDED POSITION
      *
@@ -19,6 +21,9 @@ public class Bishop extends Piece {
         xTG = moveto.charAt(0);
         yTG = moveto.charAt(1) - 48;
         if ((xTG > 104 || xTG < 97) || (yTG < 1 || yTG > 8)) {
+            return false;
+        }
+        else if (this.isPinned()){
             return false;
         }
         else {
@@ -110,5 +115,13 @@ public class Bishop extends Piece {
             }
         }
         return false;
+    }
+
+    public boolean isPinned() {
+        return pinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
     }
 }
