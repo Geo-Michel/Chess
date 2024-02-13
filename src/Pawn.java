@@ -26,7 +26,11 @@ public class Pawn extends Piece{
         }
         else {
             if(xTG==xN){
-                if(((!moved)&&yTG==yN+2)||(yTG==yN+1)){
+                if((((!moved)&&yTG==yN+2))&&(board[xTG-97][yTG-1]==null&&board[xTG-97][yTG-2]==null)){
+                    this.setPosition(((char)xTG)+String.valueOf(yN));
+                    return true;
+                }
+                else if (yTG==yN+1&&(board[xTG-97][yTG-1]==null)) {
                     this.setPosition(((char)xTG)+String.valueOf(yN));
                     return true;
                 }
