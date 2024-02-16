@@ -28,7 +28,7 @@ public class Pawn extends Piece{
         else if (isPinned()){
             return false;
         }
-        else { //TODO Think what happens when the pawn is promoted to another piece
+        else { //TODO Think what happens when the pawn is promoted to another piece (probably will be handled in the board class)
             if(xTG==xN){
                 if((((!moved)&&yTG==yN+2))&&(board[xTG-97][yTG-1]==null&&board[xTG-97][yTG-2]==null)&&(!this.isPinned())){
                     this.setPosition(((char)xTG)+String.valueOf(yN));
