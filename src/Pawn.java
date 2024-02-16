@@ -29,20 +29,25 @@ public class Pawn extends Piece{
             return false;
         }
         else { //TODO Think what happens when the pawn is promoted to another piece (probably will be handled in the board class)
-            if(xTG==xN){
-                if((((!moved)&&yTG==yN+2))&&(board[xTG-97][yTG-1]==null&&board[xTG-97][yTG-2]==null)&&(!this.isPinned())){
-                    this.setPosition(((char)xTG)+String.valueOf(yN));
+            if(xTG==xN) {
+                if (yTG == yN + 1 && (board[xTG - 97][yTG - 1] == null) && (!this.isPinned())) {
+                    this.setMoved();
+                    this.setPosition(((char) xTG) + String.valueOf(yN));
                     return true;
-                }
-                else if (yTG==yN+1&&(board[xTG-97][yTG-1]==null)&&(!this.isPinned())) {
-                    this.setPosition(((char)xTG)+String.valueOf(yN));
-                    return true;
+                } else if (!this.isMoved()) {
+                    if ((yTG == yN + 2) && (board[xTG - 97][yTG - 1] == null && board[xTG - 97][yTG - 2] == null) && (!this.isPinned())) {
+                        this.setMoved();
+                        this.setPosition(((char) xTG) + String.valueOf(yN));
+                        return true;
+                    }
                 }
             }
             else if ((xTG==xN+1)&&(yTG==yN+1)&&(board[xTG-97][yTG-1].isWhite()!=this.isWhite())&&(!this.isPinned())) {
+                this.setMoved();
                 this.setPosition(((char)xTG)+String.valueOf(yN));
                 return true;
             } else if ((xTG==xN-1)&&(yTG==yN+1)&&(board[xTG-97][yTG-1].isWhite()!=this.isWhite())&&(!this.isPinned())) {
+                this.setMoved();
                 this.setPosition(((char)xTG)+String.valueOf(yN));
                 return true;
             }
@@ -55,5 +60,13 @@ public class Pawn extends Piece{
 
     public void setPinned(boolean pinned) {
         this.pinned = pinned;
+    }
+
+    public boolean isMoved() {
+        return moved;
+    }
+
+    public void setMoved() {
+        this.moved = true;
     }
 }

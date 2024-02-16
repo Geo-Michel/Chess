@@ -27,11 +27,11 @@ public class Knight extends Piece{
             return false;
         }
         else {
-            if((Math.abs(xTG-xN)==1)&&(Math.abs(yTG-yN)==2)&&(board[xTG][yTG].isWhite()!=this.isWhite())){
+            if((Math.abs(xTG-xN)==1)&&(Math.abs(yTG-yN)==2)&&(board[xTG-97][yTG-1]==null||board[xTG-97][yTG-1].isWhite()!=this.isWhite())){
                 this.setPosition(((char) xTG) + String.valueOf(yN));
                 return true;
             }
-            else if((Math.abs(xTG-xN)==2)&&(Math.abs(yTG-yN)==1)&&(board[xTG][yTG].isWhite()!=this.isWhite())){
+            else if((Math.abs(xTG-xN)==2)&&(Math.abs(yTG-yN)==1)&&(board[xTG-97][yTG-1]==null||board[xTG-97][yTG-1].isWhite()!=this.isWhite())){
                 this.setPosition(((char) xTG) + String.valueOf(yN));
                 return true;
             }
