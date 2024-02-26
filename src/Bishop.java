@@ -4,7 +4,6 @@ public class Bishop extends Piece {
         super(name, position, isWhite);
         this.pinned=false;
     }
-    //TODO CHECK IF THE PIECE IS PINNED
     /**
      * THIS METHOD CHECKS IF THE BISHOP CAN MOVE TO THE PROVIDED POSITION
      *
@@ -34,8 +33,8 @@ public class Bishop extends Piece {
                     tempX+=1;
                     tempY+=1;
                     if(!isBlocked) {
-                        if (tempY == yTG && tempX == xTG && (board[tempX][tempY] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
-                            this.setPosition(((char) xTG) + String.valueOf(yN));
+                        if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
+                            this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
                         }
                         else if (tempY == yTG && tempX == xTG){
@@ -45,7 +44,7 @@ public class Bishop extends Piece {
                     else {
                         return false;
                     }
-                    if(board[tempX-97][tempY-2]!=null){
+                    if(board[tempX-97][tempY-1]!=null){
                         isBlocked=true;
                     }
                 }
@@ -56,7 +55,7 @@ public class Bishop extends Piece {
                     tempY-=1;
                     if(!isBlocked) {
                         if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
-                            this.setPosition(((char) xTG) + String.valueOf(yN));
+                            this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
                         }
                         else if (tempY == yTG && tempX == xTG){
@@ -77,7 +76,7 @@ public class Bishop extends Piece {
                     tempY+=1;
                     if(!isBlocked) {
                         if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
-                            this.setPosition(((char) xTG) + String.valueOf(yN));
+                            this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
                         }
                         else if (tempY == yTG && tempX == xTG){
@@ -98,7 +97,7 @@ public class Bishop extends Piece {
                     tempY-=1;
                     if(!isBlocked) {
                         if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
-                            this.setPosition(((char) xTG) + String.valueOf(yN));
+                            this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
                         }
                         else if (tempY == yTG && tempX == xTG){
