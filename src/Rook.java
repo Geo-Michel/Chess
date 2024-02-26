@@ -1,43 +1,47 @@
-public class Bishop extends Piece {
-    private boolean pinned;
-    public Bishop(String name, String position, boolean isWhite) {
+public class Rook extends Piece {
+    private boolean moved,pinned;
+
+    public Rook(String name, String position, boolean isWhite) {
         super(name, position, isWhite);
+        this.moved = false;
         this.pinned=false;
     }
     /**
-     * THIS METHOD CHECKS IF THE BISHOP CAN MOVE TO THE PROVIDED POSITION
+     * THIS METHOD CHECKS IF THE ROOK CAN MOVE TO THE PROVIDED POSITION
      *
-     * @param moveto the position where the bishop is requested to be moved to
-     * var xN the horizontal axis the bishop currently is
-     * var yN the vertical axis the bishop currently is
-     * var xTG the vertical axis the bishop is requested to be moved to
-     * var yTG the horizontal axis the bishop is requested to be moved to
+     * @param moveto the position where the rook is requested to be moved to
+     * var xN the horizontal axis the rook currently is
+     * var yN the vertical axis the rook currently is
+     * var xTG the vertical axis the rook is requested to be moved to
+     * var yTG the horizontal axis the rook is requested to be moved to
      */
-    public boolean move(String moveto, Piece[][] board) {
+
+    public boolean move(String moveto, Piece[][] board){
         int xN, yN, xTG, yTG;
         xN = this.getXAxis();
         yN = this.getYAxis();
         xTG = moveto.charAt(0);
         yTG = moveto.charAt(1) - 48;
-        if ((xTG > 104 || xTG < 97) || (yTG < 1 || yTG > 8)) {
+        if((xTG>104||xTG<97)||(yTG<1||yTG>8)){
             return false;
-        }
-        else if (this.isPinned()){
+        } else if (this.isPinned()) {
             return false;
         }
         else {
-            int tempX = xN, tempY = yN;
-            boolean isBlocked=false; //becomes true if the path to the destination is blocked by another piece
-            if(xTG>xN&&yTG>yN){
-                while(!((tempX > 104 || tempX < 97) || (tempY < 1 || tempY > 8))){
-                    tempX+=1;
+            int tempX,tempY;
+            tempX=xN;
+            tempY=yN;
+            boolean isBlocked=false;    //becomes true if the path to the destination is blocked by another piece
+            if(xTG==xN&&yTG>yN) {//moving rook upwards
+                while (!(tempY < 1 || tempY > 8)) {
                     tempY+=1;
                     if(!isBlocked) {
-                        if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
+                        if ((tempY == yTG) && ((board[xTG - 97][yTG - 1] == null) || board[xTG - 97][yTG - 1].isWhite() != this.isWhite())) {
+                            this.setMoved();
                             this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
                         }
-                        else if (tempY == yTG && tempX == xTG){
+                        else if(tempY==yTG){
                             return false;
                         }
                     }
@@ -49,16 +53,36 @@ public class Bishop extends Piece {
                     }
                 }
             }
-            else if (xTG>xN&&yTG<yN) {
-                while(!((tempX > 104 || tempX < 97) || (tempY < 1 || tempY > 8))){
+            else if(xTG==xN&&yTG<yN) {//moving rook downwards
+                while (!(tempY < 1 || tempY > 8)) {
+                    tempY-=1;
+                    if(!isBlocked) {
+                        if ((tempY == yTG) && ((board[xTG - 97][yTG - 1] == null) || board[xTG - 97][yTG - 1].isWhite() != this.isWhite())) {
+                            this.setMoved();
+                            this.setPosition(((char) xTG) + String.valueOf(yTG));
+                            return true;
+                        }
+                        else if(tempY==yTG){
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+                    if(board[tempX-97][tempY-1]!=null){
+                        isBlocked=true;
+                    }
+                }
+            }
+            else if(xTG>xN&&yTG==yN) {//moving rook to the right
+                while (!(tempX < 97 || tempX > 104)) {
                     tempX+=1;
-                    tempY-=1;
                     if(!isBlocked) {
-                        if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
+                        if ((tempX == xTG) && ((board[xTG - 97][yTG - 1] == null) || board[xTG - 97][yTG - 1].isWhite() != this.isWhite())) {
+                            this.setMoved();
                             this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
-                        }
-                        else if (tempY == yTG && tempX == xTG){
+                        } else if (xTG==tempX) {
                             return false;
                         }
                     }
@@ -70,37 +94,15 @@ public class Bishop extends Piece {
                     }
                 }
             }
-            else if (xTG<xN&&yTG>yN) {
-                while(!((tempX > 104 || tempX < 97) || (tempY < 1 || tempY > 8))){
+            else if(xTG<xN&&yTG==yN) {//moving rook to the left
+                while (!(tempX < 97 || tempX > 104)) {
                     tempX-=1;
-                    tempY+=1;
                     if(!isBlocked) {
-                        if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
+                        if ((tempX == xTG) && ((board[xTG - 97][yTG - 1] == null) || board[xTG - 97][yTG - 1].isWhite() != this.isWhite())) {
+                            this.setMoved();
                             this.setPosition(((char) xTG) + String.valueOf(yTG));
                             return true;
-                        }
-                        else if (tempY == yTG && tempX == xTG){
-                            return false;
-                        }
-                    }
-                    else {
-                        return false;
-                    }
-                    if(board[tempX-97][tempY-1]!=null){
-                        isBlocked=true;
-                    }
-                }
-            }
-            else if (xTG<xN&&yTG<yN) {
-                while(!((tempX > 104 || tempX < 97) || (tempY < 1 || tempY > 8))){
-                    tempX-=1;
-                    tempY-=1;
-                    if(!isBlocked) {
-                        if (tempY == yTG && tempX == xTG && (board[tempX-97][tempY-1] == null || board[tempX-97][tempY-1].isWhite() != this.isWhite())) {
-                            this.setPosition(((char) xTG) + String.valueOf(yTG));
-                            return true;
-                        }
-                        else if (tempY == yTG && tempX == xTG){
+                        } else if (xTG==tempX) {
                             return false;
                         }
                     }
@@ -116,12 +118,19 @@ public class Bishop extends Piece {
         return false;
     }
 
+    public boolean isMoved() {
+        return moved;
+    }
+
     public boolean isPinned() {
         return pinned;
+    }
+
+    public void setMoved() {
+        this.moved = true;
     }
 
     public void setPinned(boolean pinned) {
         this.pinned = pinned;
     }
-
 }
