@@ -1,10 +1,9 @@
 public class Pawn extends Piece{
-    private boolean moved,pinned;
+    private boolean moved;
 
     public Pawn(String name, String position, boolean isWhite) {
         super(name, position, isWhite);
         this.moved=false;
-        this.pinned=false;
     }
     /**THIS METHOD CHECKS IF THE PAWN CAN MOVE TO THE PROVIDED POSITION
     * @param moveto the position where the pawn is requested to be moved to
@@ -53,13 +52,6 @@ public class Pawn extends Piece{
             }
         }
         return false;
-    }
-    public boolean isPinned(){
-        return pinned;
-    }
-
-    public void setPinned(boolean pinned) {
-        this.pinned = pinned;
     }
 
     public boolean isMoved() {

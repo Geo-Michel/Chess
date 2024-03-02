@@ -1,9 +1,7 @@
 public class Knight extends Piece{
-    private boolean pinned;
 
     public Knight(String name, String position, boolean isWhite) {
         super(name, position, isWhite);
-        this.pinned = false;
     }
     /**
      * THIS METHOD CHECKS IF THE KNIGHT CAN MOVE TO THE PROVIDED POSITION
@@ -38,13 +36,5 @@ public class Knight extends Piece{
         }
         return false;
 
-    }
-
-    public boolean isPinned() {
-        return pinned;
-    }
-
-    public void setPinned(boolean pinned) {
-        this.pinned = pinned;
     }
 }

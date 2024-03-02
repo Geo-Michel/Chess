@@ -1,10 +1,9 @@
 public class Rook extends Piece {
-    private boolean moved,pinned;
+    private boolean moved;
 
     public Rook(String name, String position, boolean isWhite) {
         super(name, position, isWhite);
         this.moved = false;
-        this.pinned=false;
     }
     /**
      * THIS METHOD CHECKS IF THE ROOK CAN MOVE TO THE PROVIDED POSITION
@@ -24,7 +23,7 @@ public class Rook extends Piece {
         yTG = moveto.charAt(1) - 48;
         if((xTG>104||xTG<97)||(yTG<1||yTG>8)){
             return false;
-        } else if (this.isPinned()) {
+        } else if (this.isPinned()) {//TODO: CHANGE THIS EVERYWHERE CAUSE IF IT IS PINNED IT CAN'T MOVE EVEN TO CAPTURE THE PINNING PIECE
             return false;
         }
         else {
@@ -122,15 +121,8 @@ public class Rook extends Piece {
         return moved;
     }
 
-    public boolean isPinned() {
-        return pinned;
-    }
-
     public void setMoved() {
         this.moved = true;
     }
 
-    public void setPinned(boolean pinned) {
-        this.pinned = pinned;
-    }
 }
